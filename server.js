@@ -9,7 +9,9 @@ app.use(express.json());
 
 console.log(process.env.PORT);
 
-const db = mysql.createConnection({
+const db = mysql.createPool({
+    connectionLimit : 10,
+    acquireTimeout  : 10000
     host: process.env.HOST,
     user: process.env.USER,
     password: process.env.PASSWORD, 
