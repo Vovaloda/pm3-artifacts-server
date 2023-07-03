@@ -7,6 +7,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+console.log(process.env.PORT);
+
 const db = mysql.createConnection({
     host: process.env.HOST,
     user: process.env.USER,
