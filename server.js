@@ -21,9 +21,11 @@ app.get('/levels', (req, res) =>{
     const sql1 = "SELECT * FROM levels";
     db.query(sql1, [req.body.email], (err, data) => {
         if(err){
+            console.log(err);
             return res.json("Error");
         }
         else{
+            console.log(data);
             return res.json(data);
         }
     });
