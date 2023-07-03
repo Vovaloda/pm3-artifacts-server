@@ -17,6 +17,7 @@ const db = mysql.createConnection({
 });
 
 app.get('/levels', (req, res) =>{
+    console.log(req.body.email);
     const sql1 = "SELECT * FROM levels";
     db.query(sql1, [req.body.email], (err, data) => {
         if(err){
@@ -29,6 +30,8 @@ app.get('/levels', (req, res) =>{
 });
 
 app.post('/signup', (req, res) =>{
+
+    console.log(req.body.email);
 
     const sql1 = "SELECT * FROM login WHERE email = ?";
     db.query(sql1, [req.body.email], (err, data) => {
@@ -56,6 +59,9 @@ app.post('/signup', (req, res) =>{
 });
 
 app.post('/login', (req, res) =>{
+
+    console.log(req.body.email);
+    
     const sql = "SELECT * FROM login WHERE email = ? AND password = ?";
     db.query(sql, [req.body.email, req.body.password], (err, data) => {
         if(err){
@@ -71,6 +77,9 @@ app.post('/login', (req, res) =>{
 });
 
 app.post('/getCompletedLevels', (req, res) =>{
+
+    console.log(req.body.playerId);
+    
     const sql = "SELECT * FROM levelsOfPlayers WHERE playerId = ?";
     db.query(sql, [req.body.playerId], (err, data) => {
         if(err){
@@ -83,6 +92,9 @@ app.post('/getCompletedLevels', (req, res) =>{
 });
 
 app.post('/addLevelByUser', (req, res) =>{
+
+console.log("AddLevelByUser");
+    
     const sql = "INSERT INTO `levelsOfPlayers` (`playerId`, `levelId`) VALUES (?)";
     const values = [
         req.body.playerId,
@@ -99,6 +111,9 @@ app.post('/addLevelByUser', (req, res) =>{
 });
 
 app.post('/deleteLevelByUser', (req, res) =>{
+
+console.log(req.body.playerId);
+    
     const sql = "DELETE FROM levelsOfPlayers WHERE playerId  = ? AND levelId = ?";
     db.query(sql, [req.body.playerId, req.body.levelId], (err, data) => {
         if(err){
