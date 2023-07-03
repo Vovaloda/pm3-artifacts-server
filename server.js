@@ -21,11 +21,9 @@ app.get('/levels', (req, res) =>{
     const sql1 = "SELECT * FROM levels";
     db.query(sql1, [req.body.email], (err, data) => {
         if(err){
-            console.log(err);
             return res.json("Error");
         }
         else{
-            console.log(data);
             return res.json(data);
         }
     });
@@ -67,12 +65,15 @@ app.post('/login', (req, res) =>{
     const sql = "SELECT * FROM login WHERE email = ? AND password = ?";
     db.query(sql, [req.body.email, req.body.password], (err, data) => {
         if(err){
+            console.log(err);
             return res.json("Error");
         }
         if(data.length > 0){
+            console.log(data);
             return res.json({data1: data, msg:"Succes"});
         }
         else{
+            console.log(data.length);
             return res.json("Fail");
         }
     });
